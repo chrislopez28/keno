@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+</head>
+
+<body>
+<svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .small { font: 8px sans-serif; }
+  </style>
+  <text x="38" y="10" class="small">Keno</text>
+</svg>
+<div class="grid-container">
+<svg id="grid" viewBox="0 0 101 81" xmlns="www.w3.org/2000/svg">
+</svg>
+</div>
+<div class="controls">
+<button onclick="clearDrawing(); shuffle(kenoNums); pickNums();">
+Play
+</button>
+</div>
+<div>Your Numbers: <span id="player-nums"></span></div>
+<div>Drawn Numbers: <span id="drawn"></span></div>
+</body>
+
+</html>

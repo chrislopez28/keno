@@ -1,0 +1,31 @@
+.grid-container {
+    width: 50vw;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 5px;
+  }
+  
+  
+  .rect:hover {
+    stroke: orange;
+    cursor: cell;
+  }
+  
+  .text:hover {
+    cursor: cell;
+  }
+  
+  .selected {
+    fill: blue;
+  }
+  
+  .drawn {
+    stroke-width: 1.5;
+    stroke: gold;
+  }
+  
+  .controls {
+    text-align: center;
+    margin: auto;
+    margin-bottom: 0.25rem;
+  }
