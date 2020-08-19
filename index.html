@@ -2,27 +2,29 @@
 
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="keno.css" />
+  <title>Keno</title>
+  <link rel="stylesheet" type="text/css" href="keno.css" />
 </head>
 
 <body>
-<svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    .small { font: 8px sans-serif; }
-  </style>
-  <text x="38" y="10" class="small">Keno</text>
-</svg>
-<div class="grid-container">
-<svg id="grid" viewBox="0 0 101 81" xmlns="www.w3.org/2000/svg">
-</svg>
-</div>
-<div class="controls">
-<button onclick="clearDrawing(); shuffle(kenoNums); pickNums();">
-Play
-</button>
-</div>
-<div>Your Numbers: <span id="player-nums"></span></div>
-<div>Drawn Numbers: <span id="drawn"></span></div>
+  <h1>Keno</h1>
+  <div class="grid-container">
+    <svg id="grid" viewBox="0 0 101 81" xmlns="www.w3.org/2000/svg">
+    </svg>
+  </div>
+  <div class="controls">
+    <button onclick="useCredit(); clearDrawing(); shuffle(kenoNums); pickNums(); matches = checkNums(playerNumbers, drawnNumbers); awardCredit()">
+      Quick Play
+    </button>
+    <button onclick="useCredit(); clearDrawing(); shuffle(kenoNums); slowPick(); matches = checkNums(playerNumbers, drawnNumbers); awardCredit()">
+      Play
+    </button>
+  </div>
+  <div class="info-panel"><strong>Credits: </strong><span id="credits">1000</span></div>
+  <div class="info-panel"><span id="message">Press Play to Draw Numbers</span></div>
+  <div class="info-panel"><strong>Your Numbers: </strong><span id="player-nums"></span></div>
+  <div class="info-panel"><strong>Drawn Numbers: </strong><span id="drawn"></span></div>
+  <div class="info-panel"><strong>Number of Matches: </strong><span id="matches"> - </span> out of <span id="num-selected"> - </span></div>
 </body>
 
 <script src="keno.js"></script>

@@ -1,10 +1,18 @@
+body {
+    font-family: sans-serif;
+}
+
+h1 {
+    text-align: center;
+    font-size: xxx-large;
+}
+
 .grid-container {
     width: 50vw;
     text-align: center;
     margin: auto;
     margin-bottom: 5px;
-  }
-  
+} 
   
   .rect:hover {
     stroke: orange;
@@ -16,7 +24,7 @@
   }
   
   .selected {
-    fill: blue;
+    fill: violet;
   }
   
   .drawn {
@@ -28,4 +36,11 @@
     text-align: center;
     margin: auto;
     margin-bottom: 0.25rem;
+  }
+
+  .info-panel {
+      margin: 0.1rem;
+      border: 0.1rem solid slateblue;
+      border-radius: 0.2rem;
+      padding: 0.1rem;
   }

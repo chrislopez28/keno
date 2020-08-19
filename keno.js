@@ -60,7 +60,7 @@ clicked = (event) => {
 }
 
 var grid = [];
-
+var credits = 1000;
 var count = 1;
 
 for (let i = 0; i < rows; i++) {
@@ -83,16 +83,8 @@ for (let i = 0; i < rows; i++) {
   }
 }
 
-randomizeCells = () => {
-	for (let i = 0; i < rows; i++) {
-  	for (let j = 0 ; j < cols; j++) {
-    	grid[i][j].selected = ( Math.round(Math.random()) == 0 ? false : true );
-    }
-  }
-} 
-
-// const kenoNums = Array.from(Array(80), (_, i) => i + 1)
-const kenoNums = [...Array(80).keys()];
+const kenoNums = Array.from(Array(80), (_, i) => i + 1);
+var matches = [];
 
 shuffle = (arr) => {
 	for (let i = arr.length - 1; i > 0; i--) {
@@ -107,8 +99,8 @@ shuffle(kenoNums);
 
 getCoords = (num) => {
 	return {
-  	i: Math.floor(num / 10),
-    j: (num % 10)
+  	i: Math.floor( (num - 1) / 10),
+    j: ((num - 1) % 10)
   };
 }
 
@@ -117,13 +109,75 @@ var drawnNumbers = [];
 
 pickNums = () => {
 	for (let i = 0; i < 20; i++) {
-  	pick = getCoords(kenoNums[i])
-    // console.log(kenoNums[i], pick)
-  	document.getElementById(`rect_${pick.i}${pick.j}`).classList.add('drawn');
-    grid[pick.i][pick.j].drawn = true;
-    drawnNumbers.push(kenoNums[i]);
-  }
-  document.getElementById('drawn').innerHTML = drawnNumbers;
+        pick = getCoords(kenoNums[i])
+        console.log(kenoNums[i], pick)
+        document.getElementById(`rect_${pick.i}${pick.j}`).classList.add('drawn');
+        grid[pick.i][pick.j].drawn = true;
+        drawnNumbers.push(kenoNums[i]);
+    }
+    document.getElementById('drawn').innerHTML = drawnNumbers;
+}
+
+slowPick = () => {
+    let counter = 0;
+    let pickInterval = setInterval( () => {
+        matches = [];
+        pick = getCoords(kenoNums[counter])
+        console.log(kenoNums[counter], pick)
+        document.getElementById(`rect_${pick.i}${pick.j}`).classList.add('drawn');
+        grid[pick.i][pick.j].drawn = true;
+        drawnNumbers.push(kenoNums[counter]);
+        document.getElementById('drawn').innerHTML = drawnNumbers;
+
+        Object.keys(playerNumbers).forEach( element => {
+            if (drawnNumbers.includes(parseInt(element))) {
+                matches.push(element);
+            }
+        })
+        document.getElementById('matches').innerHTML = `${matches.length}`;
+
+        counter++;
+        if (counter == 20) {
+            clearInterval(pickInterval);
+        }
+
+    }, 1000)
+}
+
+useCredit = () => {
+    if (credits >=1) {
+        credits--
+        document.getElementById('credits').innerHTML = credits;
+    } 
+}
+
+awardCredit = () => {
+    if (Object.keys(playerNumbers).length == 8) {
+        if (matches.length == 4) {
+            credits = credits + 2
+            document.getElementById('message').innerHTML = `You won 2 credits`;
+        }
+        if (matches.length == 5) {
+            credits = credits + 15
+            document.getElementById('message').innerHTML = `You won 15 credits`;
+        }
+        if (matches.length == 6) {
+            credits = credits + 50
+            document.getElementById('message').innerHTML = `You won 50 credits`;
+        }
+        if (matches.length == 7) {
+            credits = credits + 300
+            document.getElementById('message').innerHTML = `You won 300 credits`;
+        }
+        if (matches.length == 8) {
+            credits = credits + 10000
+            document.getElementById('message').innerHTML = `You won 10000 credits`;
+        }
+        document.getElementById('credits').innerHTML = credits;
+    }
+    if (matches.length < 4) {
+        document.getElementById('message').innerHTML = 'Game Over. Push Play to Draw Again.';
+    }
 }
 
 clearDrawing = () => {
@@ -150,11 +204,26 @@ const updateSelectStatus = (i, j) => {
   	document.getElementById(`rect_${i}${j}`).classList.add('selected');
     playerNumbers[grid[i][j].value] = false;
     document.getElementById('player-nums').innerHTML = Object.keys(playerNumbers);
+    document.getElementById('num-selected').innerHTML = Object.keys(playerNumbers).length;
   } else {
   	document.getElementById(`rect_${i}${j}`).classList.remove("selected");
     delete playerNumbers[grid[i][j].value];
     document.getElementById('player-nums').innerHTML = Object.keys(playerNumbers);
+    document.getElementById('num-selected').innerHTML = Object.keys(playerNumbers).length;
   }
+}
+
+
+
+checkNums = (playerNumbers, drawnNumbers) => {
+    matches = []
+    Object.keys(playerNumbers).forEach( element => {
+        if (drawnNumbers.includes(parseInt(element))) {
+            matches.push(element);
+        }
+    })
+    document.getElementById('matches').innerHTML = `${matches.length}`;
+    return matches;
 }
 
 oMousePosSVG = (e) => {
