@@ -1,3 +1,5 @@
+console.log(paytable);
+
 let svgns = "http://www.w3.org/2000/svg";
 let viewBoxWidth = 100;
 let viewBoxHeight = 80;
@@ -152,32 +154,16 @@ useCredit = () => {
 }
 
 awardCredit = () => {
-    if (Object.keys(playerNumbers).length == 8) {
-        if (matches.length == 4) {
-            credits = credits + 2
-            document.getElementById('message').innerHTML = `You won 2 credits`;
-        }
-        if (matches.length == 5) {
-            credits = credits + 15
-            document.getElementById('message').innerHTML = `You won 15 credits`;
-        }
-        if (matches.length == 6) {
-            credits = credits + 50
-            document.getElementById('message').innerHTML = `You won 50 credits`;
-        }
-        if (matches.length == 7) {
-            credits = credits + 300
-            document.getElementById('message').innerHTML = `You won 300 credits`;
-        }
-        if (matches.length == 8) {
-            credits = credits + 10000
-            document.getElementById('message').innerHTML = `You won 10000 credits`;
-        }
-        document.getElementById('credits').innerHTML = credits;
+  let numSelected = Object.keys(playerNumbers).length;
+  if (paytable[numSelected]) {
+    let numHit = matches.length;
+    if (paytable[numSelected][numHit]) {
+      credits += paytable[numSelected][numHit];
+      document.getElementById('message').innerHTML = `You won ${ paytable[numSelected][numHit] } credits`;
+    } else {
+      document.getElementById('message').innerHTML = 'Game Over. Push Play to Draw Again.';
     }
-    if (matches.length < 4) {
-        document.getElementById('message').innerHTML = 'Game Over. Push Play to Draw Again.';
-    }
+  } 
 }
 
 clearDrawing = () => {
