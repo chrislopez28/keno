@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
     font-family: sans-serif;
 }
@@ -8,7 +12,7 @@ h1 {
 }
 
 .grid-container {
-    width: 50vw;
+    width: 70vw;
     text-align: center;
     margin: auto;
     margin-bottom: 5px;
@@ -47,9 +51,46 @@ h1 {
     margin-bottom: 0.25rem;
   }
 
-  .info-panel {
-      margin: 0.1rem;
-      border: 0.1rem solid slateblue;
-      border-radius: 0.2rem;
-      padding: 0.1rem;
+button {
+  font-size: xx-large;
+  font-weight: bold;
+  padding: 1.5rem;
+  margin: 1rem 0rem;
+  background: orangered;
+  border-radius: 1rem;
+}
+
+.info-container {
+  border: 0.1rem solid black;
+  border-radius: 0.2rem;
+  width: 80vw;
+  margin: auto;
+}
+
+.info-panel {
+  font-size: x-large;
+  overflow-wrap: break-word;
+}
+
+  .info-credits,
+  .info-drawn,
+  .info-matches,
+  .info-selected {
+    margin: 0.5rem;
+    width: 100%;
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+  }
+
+.info-message {
+  width: 100%;
+  text-align: center;
+  color: white;
+  background: steelblue;
+  padding: 0.50rem 0rem;
+  border-bottom: 0.1rem solid black; 
+}
+
+  .drawing-active {
+    background: grey;
   }

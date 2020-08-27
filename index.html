@@ -13,18 +13,21 @@
     </svg>
   </div>
   <div class="controls">
-    <button onclick="useCredit(); clearDrawing(); shuffle(kenoNums); pickNums(); matches = checkNums(playerNumbers, drawnNumbers); awardCredit()">
+    <button class="play-button" onclick="useCredit(); clearDrawing(); shuffle(kenoNums); pickNums(); matches = checkNums(playerNumbers, drawnNumbers); awardCredit()">
       Quick Play
     </button>
-    <button onclick="slowPick();">
+    <button class="play-button" onclick="slowPick();">
       Play
     </button>
   </div>
-  <div class="info-panel"><strong>Credits: </strong><span id="credits">1000</span></div>
-  <div class="info-panel"><span id="message">Press Play to Draw Numbers</span></div>
-  <div class="info-panel"><strong>Your Numbers: </strong><span id="player-nums"></span></div>
-  <div class="info-panel"><strong>Drawn Numbers: </strong><span id="drawn"></span></div>
-  <div class="info-panel"><strong>Number of Matches: </strong><span id="matches"> - </span> out of <span id="num-selected"> - </span></div>
+  <div class="info-container">
+    <div class="info-panel info-message"><span id="message">Press Play to Draw Numbers</span></div>
+    <div class="info-panel info-credits"><strong>Credits: </strong><span id="credits">1000</span></div>
+    <div class="info-panel info-selected"><strong>Your Numbers: </strong><span id="player-nums"></span></div>
+    <div class="info-panel info-drawn"><strong>Drawn Numbers: </strong><br /><span id="drawn"></span></div>
+    <div class="info-panel info-matches"><strong>Number of Matches: </strong><span id="matches"> - </span> out of <span id="num-selected"> - </span></div> 
+  </div>
+  
 </body>
 
 <script src="paytable.js"></script>

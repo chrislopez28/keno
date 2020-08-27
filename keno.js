@@ -183,20 +183,27 @@ awardCredit = () => {
   if (paytable[numSelected]) {
     let numHit = matches.length;
     if (paytable[numSelected][numHit]) {
-      // credits += paytable[numSelected][numHit];
       document.getElementById('message').innerHTML = `You won ${ paytable[numSelected][numHit] } credits`;
-      
-      let counter = 0;
-      let awardInterval = setInterval( () => {
-        credits += 1;
+      if (paytable[numSelected][numHit] == 0.5) {
+        credits += 0.5;
         creditSound.currentTime = 0.12;
         creditSound.play();
         document.getElementById('credits').innerHTML = credits;
-        counter++;
-        if (counter >= paytable[numSelected][numHit]) {
-          clearInterval(awardInterval);
-        }
-      }, 28)
+      } else {
+        let counter = 0;
+        let awardInterval = setInterval( () => {
+          credits += 1;
+          creditSound.currentTime = 0.12;
+          creditSound.play();
+          document.getElementById('credits').innerHTML = credits;
+          counter++;
+          if (counter >= paytable[numSelected][numHit]) {
+            clearInterval(awardInterval);
+          }
+        }, 28)  
+      }
+      // credits += paytable[numSelected][numHit];
+
 
 
     } else {

@@ -1,3 +1,4 @@
+/* Taken from https://www.thekenoguide.com/keno-payout-schedules.html */
 var paytable = {
     "1": {
         "1": 3
