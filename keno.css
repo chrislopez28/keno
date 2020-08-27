@@ -34,34 +34,34 @@ h1 {
   cursor: cell;
 }
 
-  .rect:hover {
-    cursor: cell;
-  }
+.rect:hover {
+  cursor: cell;
+}
 
-  .text:hover {
-    cursor: cell;
-  }
-  
-  .selected {
-    fill: violet;
-  }
-  
-  .drawn {
-    stroke-width: 1.5;
-    stroke: red;
-  }
-  
-  .controls {
-    text-align: center;
-    margin: auto;
-    margin-bottom: 0.25rem;
-  }
+.text:hover {
+  cursor: cell;
+}
 
-  button {
-    border: none;
-    background-color: transparent;
-    outline: none;
- }
+.selected {
+  fill: violet;
+}
+
+.drawn {
+  stroke-width: 1.5;
+  stroke: red;
+}
+
+.controls {
+  text-align: center;
+  margin: auto;
+  margin-bottom: 0.25rem;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
 
 .play {
   font-size: 3rem;
@@ -97,7 +97,6 @@ h1 {
   transform: translateY(4px);
 }
 
-
 .info-container {
   border: 0.1rem solid black;
   border-radius: 0.2rem;
@@ -115,7 +114,6 @@ h1 {
   .info-drawn,
   .info-matches,
   .info-selected {
-
     height: 64px;
     padding: 0.5rem;
   }
@@ -142,3 +140,58 @@ h1 {
   .drawing-active {
     background: grey;
   }
+
+@media only screen and (min-width: 601px) {
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .grid-container {
+    max-width: 28rem;
+    border: 0.25rem solid black;
+  } 
+
+  .play {
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin: 0.25rem 0.25rem;
+  }
+  
+  
+  .clear-selection,
+  .quick-play {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+    margin: 0.5rem 0.25rem;
+  }
+
+  .info-message {
+    padding: 0.25rem 0rem;
+    border-bottom: 0.1rem solid black; 
+  }
+
+  .info-container {
+    width: 36rem;
+    margin: auto;
+    border: 0.2rem solid black;
+  }
+
+  .info-panel {
+    font-size: 1rem;
+  }
+  
+  .info-credits,
+  .info-drawn,
+  .info-matches,
+  .info-selected {
+    height: 24px;
+    padding: 0.25rem;
+  }
+  
+  .info-drawn,
+  .info-selected {
+    height: 64px;
+  }
+
+}
