@@ -214,7 +214,19 @@ clearDrawing = () => {
 }
 
 const clearSelection = () => {
-  
+  clearDrawing();
+  matches = [];
+  document.getElementById('matches').innerHTML = `${matches.length}`;
+  for (let i = 0; i < rows; i++) {
+		for (let j = 0; j < cols; j++) {
+     	if (playerNumbers[grid[i][j].value]) {
+        document.getElementById(`rect_${i}${j}`).classList.remove('selected');
+        delete playerNumbers[grid[i][j].value];
+        document.getElementById('player-nums').innerHTML = Object.keys(playerNumbers);
+        document.getElementById('num-selected').innerHTML = Object.keys(playerNumbers).length;
+      }
+    }
+  }
 }
 
 const updateSelectStatus = (i, j) => {

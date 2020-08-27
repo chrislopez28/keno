@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: monospace;
 }
 
 body {
@@ -9,7 +10,7 @@ body {
 
 h1 {
     text-align: center;
-    font-size: 5rem;
+    font-size: 6rem;
 }
 
 .grid-container {
@@ -17,9 +18,10 @@ h1 {
     text-align: center;
     margin: auto;
     margin-bottom: 5px;
-    background: lavender;
+    background: lightgray;
     padding: 1rem;
     border-radius: 0.5rem;
+    border: 0.3rem solid black;
 } 
 
 .rect {
@@ -55,31 +57,53 @@ h1 {
     margin-bottom: 0.25rem;
   }
 
-
+  button {
+    border: none;
+    background-color: transparent;
+    outline: none;
+ }
 
 .play {
-  font-size: xx-large;
+  font-size: 3rem;
   font-weight: bold;
-  padding: 2rem;
+  text-decoration: none;
+  outline: none;
+  padding: 2.5rem;
   margin: 1rem 0.5rem;
   background: crimson;
-  border-radius: 2rem;
+  border-radius: 50%;
+  border: black 0.25rem solid;
+  box-shadow: 2px 4px #999;
+}
+
+.play:active {
+  background: wheat;
+  transform: translateY(4px);
 }
 
 .clear-selection,
 .quick-play {
-  font-size: x-large;
+  font-size: 2rem;
   font-weight: bold;
   padding: 1rem;
   margin: 1rem 0.5rem;
-  background: seashell;
+  background: rgb(147, 223, 248);
+  border: black 0.1rem solid;
+  box-shadow: 2px 4px #999;
 }
+
+.clear-selection:active,
+.quick-play:active {
+  transform: translateY(4px);
+}
+
 
 .info-container {
   border: 0.1rem solid black;
   border-radius: 0.2rem;
   width: 95vw;
   margin: auto;
+  border: 0.4rem solid black;
 }
 
 .info-panel {

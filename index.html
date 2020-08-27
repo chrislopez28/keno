@@ -13,7 +13,7 @@
     </svg>
   </div>
   <div class="controls">
-    <button class="clear-selection" onclick="">
+    <button class="clear-selection" onclick="clearSelection()">
       Clear Selection
     </button>
     <button class="play-button quick-play" onclick="useCredit(); clearDrawing(); shuffle(kenoNums); pickNums(); matches = checkNums(playerNumbers, drawnNumbers); awardCredit()">
@@ -34,7 +34,6 @@
     <svg id="balls" viewBox="0 0 101 40" xmlns="www.w3.org/2000/svg">
     </svg>
   </div>
-  
 </body>
 
 <script src="paytable.js"></script>
