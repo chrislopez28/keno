@@ -4,18 +4,22 @@
 
 body {
     font-family: sans-serif;
+    background: honeydew;
 }
 
 h1 {
     text-align: center;
-    font-size: xxx-large;
+    font-size: 5rem;
 }
 
 .grid-container {
-    width: 70vw;
+    width: 80vw;
     text-align: center;
     margin: auto;
     margin-bottom: 5px;
+    background: lavender;
+    padding: 1rem;
+    border-radius: 0.5rem;
 } 
 
 .rect {
@@ -51,36 +55,56 @@ h1 {
     margin-bottom: 0.25rem;
   }
 
-button {
+
+
+.play {
   font-size: xx-large;
   font-weight: bold;
-  padding: 1.5rem;
-  margin: 1rem 0rem;
-  background: orangered;
-  border-radius: 1rem;
+  padding: 2rem;
+  margin: 1rem 0.5rem;
+  background: crimson;
+  border-radius: 2rem;
+}
+
+.clear-selection,
+.quick-play {
+  font-size: x-large;
+  font-weight: bold;
+  padding: 1rem;
+  margin: 1rem 0.5rem;
+  background: seashell;
 }
 
 .info-container {
   border: 0.1rem solid black;
   border-radius: 0.2rem;
-  width: 80vw;
+  width: 95vw;
   margin: auto;
 }
 
 .info-panel {
-  font-size: x-large;
-  overflow-wrap: break-word;
+  font-size: 36px;
+  overflow-wrap: anywhere;
 }
 
   .info-credits,
   .info-drawn,
   .info-matches,
   .info-selected {
-    margin: 0.5rem;
-    width: 100%;
-    border-radius: 0.2rem;
+
+    height: 64px;
     padding: 0.5rem;
   }
+
+.info-drawn,
+.info-selected {
+  height: 144px;
+}
+
+.info-credits,
+.info-drawn {
+  background: rgba(248, 242, 242, 0.9);
+}
 
 .info-message {
   width: 100%;

@@ -1,5 +1,3 @@
-console.log(paytable);
-
 let svgns = "http://www.w3.org/2000/svg";
 let viewBoxWidth = 100;
 let viewBoxHeight = 80;
@@ -18,17 +16,10 @@ for (let i = 0; i < rows; i++) {
 	for (let j = 0; j < cols; j++) {
   	let g = document.createElementNS(svgns, 'g');
     g.setAttributeNS(null, 'font-size', 4);
-     g.setAttributeNS(null, 'id', `${i}${j}`);
-     g.setAttributeNS(null, 'class', `rect-group`);
+    g.setAttributeNS(null, 'id', `${i}${j}`);
+    g.setAttributeNS(null, 'class', `rect-group`);
     
-     let text = document.createElementNS(svgns, 'text');
-     text.setAttributeNS(null, 'x', j * gridX + spacing * strokeWidth + (gridX - spacing * strokeWidth)/2);
-     text.setAttributeNS(null, 'y', i * gridY + spacing * strokeWidth + (gridY - spacing * strokeWidth)/1.5);
-     text.setAttributeNS(null, 'text-anchor', 'middle');
-     text.setAttributeNS(null, 'class', 'text');
-     text.setAttributeNS(null, 'id', `text_${i}${j}`);
-
-  	let rect = document.createElementNS(svgns, 'rect');
+    let rect = document.createElementNS(svgns, 'rect');
     rect.setAttributeNS(null, 'x', j * gridX + spacing * strokeWidth);
     rect.setAttributeNS(null, 'y', i * gridY + spacing * strokeWidth);
     rect.setAttributeNS(null, 'height', gridY - spacing * strokeWidth);
@@ -39,19 +30,19 @@ for (let i = 0; i < rows; i++) {
     rect.setAttributeNS(null, 'rx', rounding);
     rect.setAttributeNS(null, 'pointer-events', 'all');
     rect.setAttributeNS(null, 'class', 'rect');
- 		rect.setAttributeNS(null, 'id', `rect_${i}${j}`);
+    rect.setAttributeNS(null, 'id', `rect_${i}${j}`);
 
-    
-
-    //text.setAttributeNS(null, 'textLength', gridX - spacing * strokeWidth);
-    //text.setAttributeNS(null, 'lengthAdjust', 'spacingAndGyphs');
+    let text = document.createElementNS(svgns, 'text');
+    text.setAttributeNS(null, 'x', j * gridX + spacing * strokeWidth + (gridX - spacing * strokeWidth)/2);
+    text.setAttributeNS(null, 'y', i * gridY + spacing * strokeWidth + (gridY - spacing * strokeWidth)/1.5);
+    text.setAttributeNS(null, 'text-anchor', 'middle');
+    text.setAttributeNS(null, 'class', 'text');
+    text.setAttributeNS(null, 'id', `text_${i}${j}`);
     text.innerHTML = currentNum;
 
     g.appendChild(rect);
     g.appendChild(text);
-    
     document.getElementById('grid').appendChild(g);
-    
     currentNum++;
   }
 }
@@ -202,10 +193,6 @@ awardCredit = () => {
           }
         }, 28)  
       }
-      // credits += paytable[numSelected][numHit];
-
-
-
     } else {
       document.getElementById('message').innerHTML = 'Game Over. Push Play to Draw Again.';
     }
@@ -224,9 +211,11 @@ clearDrawing = () => {
   }
   drawnNumbers = [];
   document.getElementById('drawn').innerHTML = "";
-
 }
 
+const clearSelection = () => {
+  
+}
 
 const updateSelectStatus = (i, j) => {
 	
