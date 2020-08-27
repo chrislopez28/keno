@@ -18,8 +18,16 @@ for (let i = 0; i < rows; i++) {
 	for (let j = 0; j < cols; j++) {
   	let g = document.createElementNS(svgns, 'g');
     g.setAttributeNS(null, 'font-size', 4);
- 		g.setAttributeNS(null, 'id', `${i}${j}`);
+     g.setAttributeNS(null, 'id', `${i}${j}`);
+     g.setAttributeNS(null, 'class', `rect-group`);
     
+     let text = document.createElementNS(svgns, 'text');
+     text.setAttributeNS(null, 'x', j * gridX + spacing * strokeWidth + (gridX - spacing * strokeWidth)/2);
+     text.setAttributeNS(null, 'y', i * gridY + spacing * strokeWidth + (gridY - spacing * strokeWidth)/1.5);
+     text.setAttributeNS(null, 'text-anchor', 'middle');
+     text.setAttributeNS(null, 'class', 'text');
+     text.setAttributeNS(null, 'id', `text_${i}${j}`);
+
   	let rect = document.createElementNS(svgns, 'rect');
     rect.setAttributeNS(null, 'x', j * gridX + spacing * strokeWidth);
     rect.setAttributeNS(null, 'y', i * gridY + spacing * strokeWidth);
@@ -34,16 +42,11 @@ for (let i = 0; i < rows; i++) {
  		rect.setAttributeNS(null, 'id', `rect_${i}${j}`);
 
     
-    let text = document.createElementNS(svgns, 'text');
-    text.setAttributeNS(null, 'x', j * gridX + spacing * strokeWidth + (gridX - spacing * strokeWidth)/2);
-    text.setAttributeNS(null, 'y', i * gridY + spacing * strokeWidth + (gridY - spacing * strokeWidth)/1.5);
-    text.setAttributeNS(null, 'text-anchor', 'middle');
-    text.setAttributeNS(null, 'class', 'text');
-  	text.setAttributeNS(null, 'id', `text_${i}${j}`);
+
     //text.setAttributeNS(null, 'textLength', gridX - spacing * strokeWidth);
     //text.setAttributeNS(null, 'lengthAdjust', 'spacingAndGyphs');
     text.innerHTML = currentNum;
-    
+
     g.appendChild(rect);
     g.appendChild(text);
     
@@ -64,6 +67,10 @@ clicked = (event) => {
 var grid = [];
 var credits = 1000;
 var count = 1;
+var pickSound = new Audio("./sounds/click.wav");
+var matchSound = new Audio("./sounds/ding.wav");
+var creditSound = new Audio("./sounds/bell.wav");
+creditSound.volume = 0.6;
 
 for (let i = 0; i < rows; i++) {
 	grid.push([])
@@ -108,6 +115,7 @@ getCoords = (num) => {
 
 var playerNumbers = {};
 var drawnNumbers = [];
+var drawingActive = false;
 
 pickNums = () => {
 	for (let i = 0; i < 20; i++) {
@@ -121,29 +129,46 @@ pickNums = () => {
 }
 
 slowPick = () => {
+  if (!drawingActive) {
+    useCredit(); 
+    clearDrawing(); 
+    shuffle(kenoNums); 
+    drawingActive = true;
+    document.getElementById('message').innerHTML = 'Drawing Numbers...';
     let counter = 0;
     let pickInterval = setInterval( () => {
         matches = [];
         pick = getCoords(kenoNums[counter])
+  
         console.log(kenoNums[counter], pick)
         document.getElementById(`rect_${pick.i}${pick.j}`).classList.add('drawn');
         grid[pick.i][pick.j].drawn = true;
         drawnNumbers.push(kenoNums[counter]);
+  
         document.getElementById('drawn').innerHTML = drawnNumbers;
-
+  
         Object.keys(playerNumbers).forEach( element => {
             if (drawnNumbers.includes(parseInt(element))) {
                 matches.push(element);
             }
+            if (playerNumbers[grid[pick.i][pick.j].value]) {
+              matchSound.play();
+            } else {
+              pickSound.play();
+            }
         })
         document.getElementById('matches').innerHTML = `${matches.length}`;
-
+  
         counter++;
         if (counter == 20) {
-            clearInterval(pickInterval);
+          drawingActive = false;
+          clearInterval(pickInterval);
+          matches = checkNums(playerNumbers, drawnNumbers); 
+          awardCredit()
         }
-
-    }, 1000)
+    }, 750)
+  }
+  
 }
 
 useCredit = () => {
@@ -158,12 +183,27 @@ awardCredit = () => {
   if (paytable[numSelected]) {
     let numHit = matches.length;
     if (paytable[numSelected][numHit]) {
-      credits += paytable[numSelected][numHit];
+      // credits += paytable[numSelected][numHit];
       document.getElementById('message').innerHTML = `You won ${ paytable[numSelected][numHit] } credits`;
+      
+      let counter = 0;
+      let awardInterval = setInterval( () => {
+        credits += 1;
+        creditSound.currentTime = 0.12;
+        creditSound.play();
+        document.getElementById('credits').innerHTML = credits;
+        counter++;
+        if (counter >= paytable[numSelected][numHit]) {
+          clearInterval(awardInterval);
+        }
+      }, 28)
+
+
     } else {
       document.getElementById('message').innerHTML = 'Game Over. Push Play to Draw Again.';
     }
   } 
+  document.getElementById('credits').innerHTML = credits;
 }
 
 clearDrawing = () => {
@@ -180,7 +220,6 @@ clearDrawing = () => {
 
 }
 
-pickNums();
 
 const updateSelectStatus = (i, j) => {
 	
@@ -188,7 +227,7 @@ const updateSelectStatus = (i, j) => {
   grid[i][j].selected = !grid[i][j].selected; 
   if (grid[i][j].selected) {
   	document.getElementById(`rect_${i}${j}`).classList.add('selected');
-    playerNumbers[grid[i][j].value] = false;
+    playerNumbers[grid[i][j].value] = true;
     document.getElementById('player-nums').innerHTML = Object.keys(playerNumbers);
     document.getElementById('num-selected').innerHTML = Object.keys(playerNumbers).length;
   } else {

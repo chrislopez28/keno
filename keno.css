@@ -16,13 +16,18 @@ h1 {
 
 .rect {
   fill: lightsteelblue;
+  z-index: 1;
 }
   
+.rect-group:hover .rect {
+  stroke: orange;
+  cursor: cell;
+}
+
   .rect:hover {
-    stroke: orange;
     cursor: cell;
   }
-  
+
   .text:hover {
     cursor: cell;
   }
