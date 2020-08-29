@@ -95,8 +95,6 @@ shuffle = (arr) => {
   }
 }
 
-shuffle(kenoNums);
-
 getCoords = (num) => {
 	return {
   	i: Math.floor( (num - 1) / 10),
@@ -159,7 +157,6 @@ slowPick = () => {
         }
     }, 750)
   }
-  
 }
 
 useCredit = () => {
@@ -245,8 +242,6 @@ const updateSelectStatus = (i, j) => {
     document.getElementById('num-selected').innerHTML = Object.keys(playerNumbers).length;
   }
 }
-
-
 
 checkNums = (playerNumbers, drawnNumbers) => {
     matches = []
