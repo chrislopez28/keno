@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Keno</title>
   <link rel="stylesheet" type="text/css" href="keno.css" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -19,26 +20,25 @@
     </svg>
   </div>
   <div class="controls">
-    <button class="clear-selection" onclick="clearSelection()">
+    <button class="clear-selection" onclick="keno.clearSelection()">
       Clear Selection
     </button>
-    <button class="play-button quick-play" onclick="useCredit(); clearDrawing(); shuffle(kenoNums); pickNums(); matches = checkNums(playerNumbers, drawnNumbers); awardCredit()">
+    <button class="play-button quick-play" onclick="keno.quickPlay()">
       Quick Play
     </button>
-    <button class="play-button play" onclick="slowPick();">
+    <button class="play-button play" onclick="keno.slowPlay();">
       Play
     </button>
   </div>
   <div class="info-container">
     <div class="info-panel info-message"><span id="message">Press Play to Draw Numbers</span></div>
-    <div class="info-panel info-credits"><strong>Credits: </strong><span id="credits">1000</span></div>
+    <div class="info-panel info-credits"><strong>Credits: </strong><span id="credits">20</span></div>
     <div class="info-panel info-selected"><strong>Your Numbers: </strong><br /><span id="player-nums"></span></div>
     <div class="info-panel info-drawn"><strong>Drawn Numbers: </strong><br /><span id="drawn"></span></div>
-    <div class="info-panel info-matches"><strong>Number of Matches: </strong><span id="matches"> - </span> out of <span id="num-selected"> - </span></div> 
+    <div class="info-panel info-matches"><strong>Number of Matches: </strong><span id="matches"> 0 </span> out of <span id="num-selected"> 0 </span></div> 
   </div>
-  <div class="balls-container">
-    <svg id="balls" viewBox="0 0 101 40" xmlns="www.w3.org/2000/svg">
-    </svg>
+  <div class="payouts">
+
   </div>
 </body>
 
