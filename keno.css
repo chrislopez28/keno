@@ -4,31 +4,31 @@
 }
 
 body {
-    font-family: sans-serif;
-    background: honeydew;
+  font-family: sans-serif;
+  background: honeydew;
 }
 
 h1 {
-    text-align: center;
-    font-size: 6rem;
+  text-align: center;
+  font-size: 3rem;
 }
 
 .grid-container {
-    width: 80vw;
-    text-align: center;
-    margin: auto;
-    margin-bottom: 5px;
-    background: lightgray;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    border: 0.3rem solid black;
-} 
+  width: 80vw;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 5px;
+  background: lightgray;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 0.3rem solid black;
+}
 
 .rect {
   fill: lightsteelblue;
   z-index: 1;
 }
-  
+
 .rect-group:hover .rect {
   stroke: orange;
   cursor: cell;
@@ -64,12 +64,12 @@ button {
 }
 
 .play {
-  font-size: 3rem;
+  font-size: 1rem;
   font-weight: bold;
   text-decoration: none;
   outline: none;
-  padding: 2.5rem;
-  margin: 1rem 0.5rem;
+  padding: 0.5rem;
+  margin: 0.5rem 0.5rem;
   background: crimson;
   border-radius: 50%;
   border: black 0.25rem solid;
@@ -83,9 +83,9 @@ button {
 
 .clear-selection,
 .quick-play {
-  font-size: 2rem;
+  font-size: 0.75rem;
   font-weight: bold;
-  padding: 1rem;
+  padding: 0.25rem;
   margin: 1rem 0.5rem;
   background: rgb(147, 223, 248);
   border: black 0.1rem solid;
@@ -106,7 +106,7 @@ button {
 }
 
 .info-panel {
-  font-size: 36px;
+  font-size: 1rem;
   overflow-wrap: anywhere;
 }
 
@@ -114,13 +114,13 @@ button {
 .info-drawn,
 .info-matches,
 .info-selected {
-  height: 64px;
+  height: 2rem;
   padding: 0.5rem;
 }
 
 .info-drawn,
 .info-selected {
-  height: 144px;
+  height: 5rem;
 }
 
 .info-credits,
@@ -133,8 +133,8 @@ button {
   text-align: center;
   color: white;
   background: steelblue;
-  padding: 0.50rem 0rem;
-  border-bottom: 0.1rem solid black; 
+  padding: 0.5rem 0rem;
+  border-bottom: 0.1rem solid black;
 }
 
 .drawing-active {
@@ -145,8 +145,25 @@ button {
   text-align: center;
 }
 
-@media only screen and (min-width: 601px) {
+.payouts-active {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: red;
+}
 
+.payouts {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0vh;
+  width: 0vw;
+  background: red;
+}
+
+@media only screen and (min-width: 601px) {
   h1 {
     font-size: 2.5rem;
   }
@@ -154,15 +171,14 @@ button {
   .grid-container {
     max-width: 28rem;
     border: 0.25rem solid black;
-  } 
+  }
 
   .play {
     font-size: 1rem;
     padding: 0.5rem;
     margin: 0.25rem 0.25rem;
   }
-  
-  
+
   .clear-selection,
   .quick-play {
     font-size: 0.8rem;
@@ -172,7 +188,7 @@ button {
 
   .info-message {
     padding: 0.25rem 0rem;
-    border-bottom: 0.1rem solid black; 
+    border-bottom: 0.1rem solid black;
   }
 
   .info-container {
@@ -184,7 +200,7 @@ button {
   .info-panel {
     font-size: 1rem;
   }
-  
+
   .info-credits,
   .info-drawn,
   .info-matches,
@@ -192,10 +208,9 @@ button {
     height: 24px;
     padding: 0.25rem;
   }
-  
+
   .info-drawn,
   .info-selected {
     height: 64px;
   }
-
 }
