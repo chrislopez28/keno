@@ -110,13 +110,13 @@ button {
   overflow-wrap: anywhere;
 }
 
-  .info-credits,
-  .info-drawn,
-  .info-matches,
-  .info-selected {
-    height: 64px;
-    padding: 0.5rem;
-  }
+.info-credits,
+.info-drawn,
+.info-matches,
+.info-selected {
+  height: 64px;
+  padding: 0.5rem;
+}
 
 .info-drawn,
 .info-selected {
@@ -137,9 +137,13 @@ button {
   border-bottom: 0.1rem solid black; 
 }
 
-  .drawing-active {
-    background: grey;
-  }
+.drawing-active {
+  background: grey;
+}
+
+.notes {
+  text-align: center;
+}
 
 @media only screen and (min-width: 601px) {
 
