@@ -143,7 +143,6 @@ var paytable = {
 };
 
 var payoutTable = document.getElementById("payout-table");
-console.log(payoutTable);
 
 let headers = document.createElement("thead");
 let headerRow = document.createElement("tr");
@@ -176,6 +175,5 @@ for (let j = 1; j <= 15; j++) {
   body.appendChild(row);
 }
 
-console.log(headers);
 payoutTable.appendChild(headers);
 payoutTable.appendChild(body);

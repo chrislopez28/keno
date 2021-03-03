@@ -119,7 +119,6 @@ const keno = (function () {
   function pickNums() {
     for (let i = 0; i < 20; i++) {
       pick = getCoords(kenoNums[i]);
-      console.log(kenoNums[i], pick);
       document.getElementById(`rect_${pick.i}${pick.j}`).classList.add("drawn");
       grid[pick.i][pick.j].drawn = true;
       drawnNumbers.push(kenoNums[i]);
@@ -228,11 +227,15 @@ const keno = (function () {
 
   /* Updates grid and playerNumbers for a square with keno coordinates i and j */
   function updateSelectStatus(i, j) {
-    console.log(i, j);
+    if (!grid[i][j].selected && Object.keys(playerNumbers).length >= 15) {
+      return updateMessage(
+        "Too many numbers selected. Select up to 15 numbers."
+      );
+    }
+
     grid[i][j].selected = !grid[i][j].selected;
     if (grid[i][j].selected) {
       document.getElementById(`rect_${i}${j}`).classList.add("selected");
-      console.log("value", playerNumbers[grid[i][j].value]);
       playerNumbers[grid[i][j].value] = true;
       document.getElementById("player-nums").innerHTML = Object.keys(
         playerNumbers
@@ -277,7 +280,6 @@ const keno = (function () {
       let pickInterval = setInterval(() => {
         matches = [];
         pick = getCoords(kenoNums[counter]);
-        console.log(kenoNums[counter], pick);
         document
           .getElementById(`rect_${pick.i}${pick.j}`)
           .classList.add("drawn");
@@ -326,11 +328,9 @@ const keno = (function () {
   }
 
   function clicked(e) {
-    if (!drawingActive) {
-      let m = oMousePosSVG(e);
-      console.log(m.y, m.x);
-      updateSelectStatus(Math.floor(m.y / gridY), Math.floor(m.x / gridX));
-    }
+    if (drawingActive) return;
+    let m = oMousePosSVG(e);
+    updateSelectStatus(Math.floor(m.y / gridY), Math.floor(m.x / gridX));
   }
 
   /* Returns x and y coordinates of a click within the svg grid */

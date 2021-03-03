@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Chris Lopez">
+  <meta name="description" content="Play Keno online. A mobile friondly keno game.">
   <title>Keno</title>
   <link rel="stylesheet" type="text/css" href="keno.css" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -23,10 +25,9 @@
 
     <div class="image-container">
       <!-- <img src="assets/payouts.png" /> -->
-
     </div>
     </table>
-    <button onclick="keno.closePayoutsScreen()">Close</button>
+    <button class="button-payouts-close" onclick="keno.closePayoutsScreen()">Close</button>
   </div>
   <h1>Keno</h1>
   <div class="grid-container">
@@ -55,7 +56,7 @@
     <div class="info-panel info-matches"><strong>Number of Matches: </strong><span id="matches"> 0 </span> out of <span id="num-selected"> 0 </span></div> 
   </div>
   <div class="notes">
-    <p>Copyright © 2020 <a href="https://clopez.me">Chris Lopez</a>. Code available on <a href="https://github.com/chrislopez28/keno">GitHub</a>.</p>
+    <p>Copyright © 2020 <a href="https://github.com/chrislopez28">Chris Lopez</a>. Code available on <a href="https://github.com/chrislopez28/keno">GitHub</a>.</p>
   <div class="payouts">
 
   </div>

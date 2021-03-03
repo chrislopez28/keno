@@ -26,9 +26,11 @@ body {
 
 table {
   display: block;
-  overflow-x: scroll;
+  overflow-x: auto;
   text-align: center;
   border-collapse: collapse;
+  width: fit-content;
+  max-width: 100%;
 }
 
 th,
@@ -142,6 +144,7 @@ button {
   padding: 0.5rem;
   margin: 0.5rem 0.5rem;
   background: crimson;
+  color: white;
   border-radius: 50%;
   border: black 0.25rem solid;
   box-shadow: 2px 4px #999;
@@ -152,10 +155,8 @@ button {
   transform: translateY(4px);
 }
 
-.button-payouts,
-.button-clear,
-.button-quick {
-  font-size: 0.75rem;
+.button-payouts-close {
+  font-size: 0.9rem;
   font-weight: bold;
   padding: 0.25rem;
   margin: 1rem 0.5rem;
@@ -164,6 +165,20 @@ button {
   box-shadow: 2px 4px #999;
 }
 
+.button-payouts,
+.button-clear,
+.button-quick {
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 0.25rem;
+  margin: 1rem 0;
+  margin-right: 0.25rem;
+  background: rgb(147, 223, 248);
+  border: black 0.1rem solid;
+  box-shadow: 2px 4px #999;
+}
+
+.button-payouts:active,
 .button-clear:active,
 .button-quick:active {
   transform: translateY(4px);
@@ -204,7 +219,7 @@ button {
   width: 100%;
   text-align: center;
   color: white;
-  background: steelblue;
+  background: rgb(41, 78, 109);
   padding: 0.5rem 0rem;
   border-bottom: 0.1rem solid black;
 }
