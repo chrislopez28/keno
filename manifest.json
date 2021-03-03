@@ -4,16 +4,16 @@
   "short_name": "Keno",
   "icons": [
     {
-      "src": "/android-chrome-512x512.png",
+      "src": "android-chrome-512x512.png",
       "sizes": "512x512",
       "purpose": "any maskable"
     },
     {
-      "src": "/android-chrome-192x192.png",
+      "src": "/keno/android-chrome-192x192.png",
       "sizes": "192x192"
     },
     {
-      "src": "/favicon-16x16.png",
+      "src": "favicon-16x16.png",
       "sizes": "16x16"
     },
     {
