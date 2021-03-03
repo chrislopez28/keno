@@ -14,19 +14,36 @@
 </head>
 
 <body>
+  <div id="payoutsScreen" class="screenOff">
+    <h1>Payouts</h1>
+    <div class="table-container">
+      <table id="payout-table">
+      </table>
+    </div>
+
+    <div class="image-container">
+      <!-- <img src="assets/payouts.png" /> -->
+
+    </div>
+    </table>
+    <button onclick="keno.closePayoutsScreen()">Close</button>
+  </div>
   <h1>Keno</h1>
   <div class="grid-container">
     <svg id="grid" viewBox="0 0 101 81" xmlns="www.w3.org/2000/svg">
     </svg>
   </div>
   <div class="controls">
-    <button class="clear-selection" onclick="keno.clearSelection()">
-      Clear Selection
+    <button id="button-payouts" class="button-payouts" onclick="keno.openPayoutsScreen()">
+      Payouts
     </button>
-    <button class="play-button quick-play" onclick="keno.quickPlay()">
+    <button id="button-clear" class="button-clear" onclick="keno.clearSelection()">
+      Clear
+    </button>
+    <button id="button-quick" class="button-quick" onclick="keno.quickPlay()">
       Quick Play
     </button>
-    <button class="play-button play" onclick="keno.slowPlay();">
+    <button id="button-play" class="button-play" onclick="keno.slowPlay();">
       Play
     </button>
   </div>

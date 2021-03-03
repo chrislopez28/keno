@@ -1,4 +1,4 @@
-keno = (function () {
+const keno = (function () {
   const svgns = "http://www.w3.org/2000/svg";
   const viewBoxWidth = 100;
   const viewBoxHeight = 80;
@@ -161,8 +161,7 @@ keno = (function () {
           }, 28);
         }
       } else {
-        document.getElementById("message").innerHTML =
-          "Game Over. Push Play to Draw Again.";
+        updateMessage("Game Over. Push Play to Draw Again.");
       }
     }
     document.getElementById("credits").innerHTML = credits;
@@ -182,26 +181,46 @@ keno = (function () {
     document.getElementById("drawn").innerHTML = "";
   }
 
+  function setDrawingActive() {
+    drawingActive = true;
+    document.getElementById("button-clear").setAttribute("disabled", true);
+    document.getElementById("button-quick").setAttribute("disabled", true);
+    document.getElementById("button-play").setAttribute("disabled", true);
+    updateMessage("Drawing Numbers...");
+  }
+
+  function setDrawingInactive() {
+    drawingActive = false;
+    document.getElementById("button-clear").removeAttribute("disabled");
+    document.getElementById("button-quick").removeAttribute("disabled");
+    document.getElementById("button-play").removeAttribute("disabled");
+    updateMessage("Game Over. Push Play to Draw Again.");
+  }
+
+  function updateMessage(message) {
+    document.getElementById("message").innerHTML = message;
+  }
+
   /* Clears player number selections */
   function clearSelection() {
-    if (!drawingActive) {
-      clearDrawing();
-      matches = [];
-      document.getElementById("matches").innerHTML = `${matches.length}`;
-      for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < cols; j++) {
-          if (playerNumbers[grid[i][j].value]) {
-            document
-              .getElementById(`rect_${i}${j}`)
-              .classList.remove("selected");
-            delete playerNumbers[grid[i][j].value];
-            document.getElementById("player-nums").innerHTML = Object.keys(
-              playerNumbers
-            );
-            document.getElementById("num-selected").innerHTML = Object.keys(
-              playerNumbers
-            ).length;
-          }
+    if (drawingActive) {
+      return;
+    }
+
+    clearDrawing();
+    matches = [];
+    document.getElementById("matches").innerHTML = `${matches.length}`;
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        if (playerNumbers[grid[i][j].value]) {
+          document.getElementById(`rect_${i}${j}`).classList.remove("selected");
+          delete playerNumbers[grid[i][j].value];
+          document.getElementById("player-nums").innerHTML = Object.keys(
+            playerNumbers
+          );
+          document.getElementById("num-selected").innerHTML = Object.keys(
+            playerNumbers
+          ).length;
         }
       }
     }
@@ -247,53 +266,53 @@ keno = (function () {
 
   /* Play game with numbers picked one-by-one */
   function slowPlay() {
-    if (!drawingActive) {
-      if (credits >= 1) {
-        useCredit();
-        clearDrawing();
-        shuffle(kenoNums);
-        drawingActive = true;
-        document.getElementById("message").innerHTML = "Drawing Numbers...";
-        let counter = 0;
-        let pickInterval = setInterval(() => {
-          matches = [];
-          pick = getCoords(kenoNums[counter]);
-          console.log(kenoNums[counter], pick);
-          document
-            .getElementById(`rect_${pick.i}${pick.j}`)
-            .classList.add("drawn");
-          grid[pick.i][pick.j].drawn = true;
-          drawnNumbers.push(kenoNums[counter]);
-          document.getElementById("drawn").innerHTML = drawnNumbers;
+    if (drawingActive) return;
 
-          Object.keys(playerNumbers).forEach((element) => {
-            if (drawnNumbers.includes(parseInt(element))) {
-              matches.push(element);
-            }
-            if (playerNumbers[grid[pick.i][pick.j].value]) {
-              matchSound.play();
-            } else {
-              pickSound.play();
-            }
-          });
-          document.getElementById("matches").innerHTML = `${matches.length}`;
-          counter++;
+    if (credits >= 1) {
+      useCredit();
+      clearDrawing();
+      shuffle(kenoNums);
+      setDrawingActive();
+      let counter = 0;
+      let pickInterval = setInterval(() => {
+        matches = [];
+        pick = getCoords(kenoNums[counter]);
+        console.log(kenoNums[counter], pick);
+        document
+          .getElementById(`rect_${pick.i}${pick.j}`)
+          .classList.add("drawn");
+        grid[pick.i][pick.j].drawn = true;
+        drawnNumbers.push(kenoNums[counter]);
+        document.getElementById("drawn").innerHTML = drawnNumbers;
 
-          if (counter == 20) {
-            drawingActive = false;
-            clearInterval(pickInterval);
-            matches = checkNums(playerNumbers, drawnNumbers);
-            awardCredit();
+        Object.keys(playerNumbers).forEach((element) => {
+          if (drawnNumbers.includes(parseInt(element))) {
+            matches.push(element);
           }
-        }, 750);
-      } else {
-        document.getElementById("message").innerHTML =
-          "Not enough credits. Restart game to play again.";
-      }
+          if (playerNumbers[grid[pick.i][pick.j].value]) {
+            matchSound.play();
+          } else {
+            pickSound.play();
+          }
+        });
+        document.getElementById("matches").innerHTML = `${matches.length}`;
+        counter++;
+
+        if (counter == 20) {
+          setDrawingInactive();
+          clearInterval(pickInterval);
+          matches = checkNums(playerNumbers, drawnNumbers);
+          awardCredit();
+        }
+      }, 750);
+    } else {
+      updateMessage("Not enough credits. Restart game to play again.");
     }
   }
 
   function quickPlay() {
+    if (drawingActive) return;
+
     if (credits >= 1) {
       useCredit();
       clearDrawing();
@@ -302,14 +321,13 @@ keno = (function () {
       matches = checkNums(playerNumbers, drawnNumbers);
       awardCredit();
     } else {
-      document.getElementById("message").innerHTML =
-        "Not enough credits. Restart game to play again.";
+      updateMessage("Not enough credits. Restart game to play again.");
     }
   }
 
-  function clicked(event) {
+  function clicked(e) {
     if (!drawingActive) {
-      let m = oMousePosSVG(event);
+      let m = oMousePosSVG(e);
       console.log(m.y, m.x);
       updateSelectStatus(Math.floor(m.y / gridY), Math.floor(m.x / gridX));
     }
@@ -327,9 +345,25 @@ keno = (function () {
 
   svg.addEventListener("click", clicked);
 
+  let showPayoutsScreen = false;
+
+  function openPayoutsScreen() {
+    showPayoutsScreen = true;
+    document.getElementById("payoutsScreen").classList.remove("screenOff");
+    document.getElementById("payoutsScreen").classList.add("screenOn");
+  }
+
+  function closePayoutsScreen() {
+    showPayoutsScreen = false;
+    document.getElementById("payoutsScreen").classList.remove("screenOn");
+    document.getElementById("payoutsScreen").classList.add("screenOff");
+  }
+
   return {
     quickPlay: quickPlay,
     clearSelection: clearSelection,
     slowPlay: slowPlay,
+    openPayoutsScreen,
+    closePayoutsScreen,
   };
 })();
