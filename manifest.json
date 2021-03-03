@@ -4,24 +4,24 @@
   "short_name": "Keno",
   "icons": [
     {
-      "src": "/android-chrome-512x512.png",
+      "src": "android-chrome-512x512.png",
       "sizes": "512x512",
       "purpose": "any maskable"
     },
     {
-      "src": "/android-chrome-192x192.png",
+      "src": "android-chrome-192x192.png",
       "sizes": "192x192"
     },
     {
-      "src": "/favicon-16x16.png",
+      "src": "favicon-16x16.png",
       "sizes": "16x16"
     },
     {
-      "src": "/favicon-32x132.png",
+      "src": "favicon-32x132.png",
       "sizes": "32x32"
     }
   ],
-  "start_url": "/keno/",
+  "start_url": "https://chrislopez28.github.io/keno/",
   "display": "fullscreen",
   "background_color": "#f0fff0",
   "theme_color": "#f0fff0"
