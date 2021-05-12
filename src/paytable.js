@@ -145,23 +145,41 @@ var paytable = {
 var payoutTable = document.getElementById("payout-table");
 
 let headers = document.createElement("thead");
-let headerRow = document.createElement("tr");
-headerRow.appendChild(document.createElement("th"));
-
+let headerRow1 = document.createElement("tr");
+let headerRow2 = document.createElement("tr");
 let tempHeader;
+
+tempHeader = document.createElement("td");
+tempHeader.setAttribute("colspan", "18");
+tempHeader.appendChild(document.createTextNode("# Spots Hit"));
+headerRow1.appendChild(tempHeader);
+
+headerRow2.appendChild(document.createElement("th"));
+headerRow2.appendChild(document.createElement("th"));
 
 for (let i = 0; i <= 15; i++) {
   tempHeader = document.createElement("th");
   tempHeader.appendChild(document.createTextNode(i));
-  headerRow.appendChild(tempHeader);
+  headerRow2.appendChild(tempHeader);
 }
 
-headers.appendChild(headerRow);
+headers.appendChild(headerRow1);
+headers.appendChild(headerRow2);
 
 let body = document.createElement("tbody");
+let row;
+
+let yAxisTitle = document.createElement("td");
+yAxisTitle.setAttribute("rowspan", "16");
+// yAxisTitle.style.writingMode = "vertical-rl";
+// yAxisTitle.style.textOrientation = "mixed";
+yAxisTitle.style.transform = "rotate(270deg)";
+
+yAxisTitle.appendChild(document.createTextNode("# Spots Selected"));
 
 for (let j = 1; j <= 15; j++) {
-  let row = document.createElement("tr");
+  row = document.createElement("tr");
+  j === 1 ? row.appendChild(yAxisTitle) : null;
   tempItem = document.createElement("td");
   tempItem.appendChild(document.createTextNode(j));
   row.appendChild(tempItem);
