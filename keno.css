@@ -20,6 +20,7 @@ body {
 }
 
 .table-container {
+  margin: 0 auto;
   text-align: center;
   padding: 1rem;
 }
@@ -58,12 +59,16 @@ th {
 
 #payoutsScreen {
   position: absolute;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   background: rgba(248, 242, 242, 1);
   z-index: 100;
   transition: all 0.25s ease-in-out;
   text-align: center;
+}
+
+#payout-table {
+  margin: 0 auto;
 }
 
 img {
@@ -258,13 +263,13 @@ button {
     font-size: 2.5rem;
   }
 
-  #payoutsScreen {
+  /* #payoutsScreen {
     width: 50vw;
   }
 
   .screenOff {
     transform: translateX(-50vw);
-  }
+  } */
 
   .grid-container {
     max-width: 28rem;
